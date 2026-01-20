@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" data-type="module">
+        import React from "https://esm.sh/react@19?dev";
+        import ReactDOM from "https://esm.sh/react-dom@19/client?dev";
+
+        function ToDoList() {
+            const [tasks, setTasks] = React.useState([]);
+            const [input, setInput] = React.useState("");
+            const [filter, setFilter] = React.useState("all"); //all/active/done
+
+            const AddTasks = () => {
+                if (input.trim() === "") return;
+                setTasks([...tasks, {text: input, done: false}]);
+                setInput("");
+            }
+
+            const toggleTasks = (index) => {
+                const newTasks = [...tasks];
+                newTasks[index].done = !newTasks[index].done;
+                setTasks(newTasks);
+            }
+
+            const DeleteTasks = (index) => {
+                setTasks(tasks.filter((task, i) => i !== index));
+            }
+
+            const filteredTasks = tasks.filter((task) => {
+                if (filter === "active") return !task.done;
+                if (filter === "done") return task.done;
+                return true;
+            });
+
+            return(
+                <div className="list">
+                    <h1 className="head_title">Список задач</h1>
+
+                    <div className="input_task">
+                        <input type="text" value={input}
+                            className="name_task"
+                            onChange={(e) => setInput(e.target.value)}
+                            placeholder="Введите задачу...">
+                        </input>
+                        <button className="input_button" onClick={AddTasks}>Добавить</button>
+                    </div>
+
+                    <div className="filters">
+                        <button className="filter_button filter_all" 
+                        onClick={() => setFilter("all")}>Все</button> 
+                        <button className="filter_button filter_active" 
+                        onClick={() => setFilter("active")}>Активные</button>  
+                        <button className="filter_button filter_done" 
+                        onClick={() => setFilter("done")}>Выполненные</button> 
+                    </div>
+
+                    <div className="column_tasks">
+                            <ul className="task_rows">
+                                {filteredTasks.map((task, index) => 
+                                <li className="task_row" key={index}>
+                                    <span className="task_text"
+                                    style = {{
+                                        cursor: "pointer",
+                                        textDecoration: task.done ? "line-through" : "none",
+                                        color: task.done ? "grey" : "black",
+
+                                    }}
+                                    onClick={() => toggleTasks(index)}>{task.text}</span>
+                                    <button className="button_delete" 
+                                    onClick={() => DeleteTasks(index)}>Удалить</button>  
+                                </li>
+                                )}    
+                            </ul>    
+                    </div>
+                </div>
+                
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById("main"))
+        .render(
+            <ToDoList />
+        );
+    </script>
+</head>
+<body>
+
+    <div id="main" class="main"></div>
+    
+</body>
+</html>

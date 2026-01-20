@@ -1,0 +1,102 @@
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul,
+ol,
+li {
+    list-style: none;
+}
+
+img {
+    vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: inherit;
+    font-size: inherit;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: orange;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.body {
+}
+
+.main {
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+    margin-top: 20px;
+}
+
+.list {
+    text-align: center;
+    border: 2px solid orange;
+    padding: 20px;
+    background-color: antiquewhite;
+    min-height: 300px;
+}
+.head_title {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+.input_task {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.name_task {
+    width: 100%;
+    font-size: 16px;
+    min-height: 20px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+.input_button {
+    max-width: 150px;
+    font-size: 16px;
+}
+.filters {
+    margin-bottom: 10px;
+}
+.filter_button:not(:last-child) {
+    margin-right: 10px;
+}
+.column_tasks {
+    min-height: 100px;
+    border: 1px solid orange;
+    padding: 10px;
+}
+.task_rows {
+}
+.task_row {
+    position: relative;
+}
+.task_row:not(:last-child) {
+    margin-bottom: 5px;
+}
+.task_text {
+    font-size: 20px;
+    margin-right: 10px;
+}
